@@ -20,7 +20,3 @@
   grid-template: repeat(5, 1fr) 20px/ 1fr;
 }
 
-ol {
-  margin: 0px;
-  margin-left: 20px;
-}

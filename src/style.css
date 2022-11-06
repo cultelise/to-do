@@ -1,0 +1,26 @@
+#root * {
+  border: 1px solid black;
+  padding: 0px;
+}
+
+#app {
+  display: grid;
+  grid-template: 1fr / 1fr 2fr 2fr;
+  height: 500px;
+}
+
+#projects {
+  display:grid;
+  grid-template: 1fr 20px / 1fr;
+  
+}
+
+#tasks {
+  display: grid;
+  grid-template: repeat(5, 1fr) 20px/ 1fr;
+}
+
+ol {
+  margin: 0px;
+  margin-left: 20px;
+}

@@ -1,7 +1,8 @@
+import "./style.css"
 
-const projectList = document.getElementById("projectList")
+const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById('addProjectButton') as HTMLButtonElement;
-const tasks = document.getElementById('tasks');
+const tasks = document.getElementById('tasks') as HTMLDivElement;
 const taskButton = document.getElementById('addTaskButton') as HTMLButtonElement;
 console.log(projectButton)
 
@@ -10,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
   taskButton?.addEventListener('click', () => console.log(1))
 })
 
-
+const projects: object[] = [];
 let counter = 0;
 
 const newProjectInput = () => {
   console.log(1);
   const newInput: HTMLInputElement = document.createElement(`input`);
   newInput.classList.add(`input${counter}`);
-  newInput.addEventListener('blur', () => inputExit);
+  newInput.addEventListener('change', () => {inputExit(); console.log(projects)});
   console.log(newInput)
   projectList?.appendChild(newInput);
 }
@@ -25,24 +26,19 @@ const newProjectInput = () => {
 const inputExit = () => {
   const inputElement = document.querySelector(`.input${counter}`) as HTMLInputElement;
   const inputValue = inputElement.value;
-  inputElement?.remove;
-  return newProject(inputValue)
+  inputElement?.remove();
+  AddProject(inputValue);
+  return projects.push(newProject(inputValue.toString()))
 }
 
-const AddThing = () => {
-  const div = document.createElement('div');
-
-  return {div};
+const newProject = (input:string) => {
+ return { title: input}
 }
 
-const newProject = (input:any) => {
-  title: input;
-}
-
-const AddProject = (name:string) => {
-  const input = document.createElement('input') as HTMLInputElement;
-  input.dirName
-  return {name}
+const AddProject = (inputValue:string) => {
+  const inputLabel = document.createElement('div')
+  inputLabel.textContent = inputValue;
+  projectList?.appendChild(inputLabel);
 }
 
 function checkList() {

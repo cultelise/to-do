@@ -1,7 +1,5 @@
 import { createProject } from "./create";
 import { displayProject } from "./display";
-import "./variable"
-
 
 const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById('addProjectButton') as HTMLButtonElement;
@@ -13,12 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   taskButton.addEventListener('click', () => console.log(1))
 })
 
-let counter = 0;
 
 const newProjectInput = () => {
   const titleInput = createProject();
-  projectList?.appendChild(titleInput);
   titleInput.focus();
+  projectList?.appendChild(titleInput);
 }
 
 

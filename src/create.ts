@@ -1,7 +1,7 @@
 import { addProjectTitle } from "./add";
 import { inputDelete } from "./remove";
 
-const projects: object[] = [];
+export const projects: object[] = [];
 
 export const NewProject = (input:string) => {
   return { title: input}
@@ -16,13 +16,13 @@ export const NewProject = (input:string) => {
  export const createProject = () => {
   const newInput: HTMLInputElement = document.createElement(`input`);
   newInput.classList.add(`tempInput`);
-  newInput.addEventListener('change', generateProject);
+  newInput.addEventListener('change', (event) =>  generateProject(event));
   return newInput;
  }
 
- const generateProject = () => {
-  const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
-  const inputValue = inputElement.value;
+ const generateProject = (event:Event) => {
+  const inputElement = event.target as HTMLInputElement;
+  const  inputValue = inputElement.value;
   inputDelete(inputElement);
   addProjectTitle(inputValue);
   return projects.push(NewProject(inputValue.toString()))

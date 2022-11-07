@@ -1,6 +1,6 @@
 
-export const displayProject = (project:HTMLDivElement) => {
-  project.addEventListener('click', () => 1)
+export const displayProject = (project:HTMLButtonElement) => {
+  project.addEventListener('click', () => console.log(1))
 }
 
 

@@ -1,4 +1,4 @@
-import { createProject } from "./create";
+import { createProject, projects } from "./create";
 import { displayProject } from "./display";
 
 const projectList = document.getElementById("projectList") as HTMLDivElement;
@@ -14,14 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const newProjectInput = () => {
   const titleInput = createProject();
-  titleInput.focus();
   projectList?.appendChild(titleInput);
+  const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
+  inputElement.focus();
 }
 
 
 export const addProjectTitle = (inputValue:string) => {
-  const inputLabel = document.createElement('div')
+  const inputLabel = document.createElement('button')
   inputLabel.textContent = inputValue;
+  inputLabel.classList.add(`project${projects.length}`)
   displayProject(inputLabel);
   projectList?.appendChild(inputLabel);
 }

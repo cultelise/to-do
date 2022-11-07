@@ -1,7 +1,6 @@
 import "./style.css";
+import "./add.js"
 
-document.addEventListener('DOMContentLoaded', () => {
-  
-})
+
 
  

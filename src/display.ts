@@ -4,6 +4,6 @@ export const displayProject = (project:HTMLButtonElement) => {
 }
 
 
-const activeProject = (event) => {
-  event.target
+const activeProject = (event: HTMLButtonElement) => {
+  event;
 };

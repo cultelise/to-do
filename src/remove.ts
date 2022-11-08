@@ -1,4 +1,4 @@
 
 export const inputDelete = (inputElement:HTMLDivElement) => {
-  inputElement?.remove();
+  inputElement.remove();
 }

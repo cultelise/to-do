@@ -1,4 +1,4 @@
-import { createProject, projects } from "./create";
+import { createProjectInput, createTaskInput, projects } from "./create";
 import { displayProject } from "./display";
 
 
@@ -6,19 +6,26 @@ const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById(
   "addProjectButton"
 ) as HTMLButtonElement;
-const tasks = document.getElementById("tasks") as HTMLDivElement;
+const taskList = document.getElementById("taskList") as HTMLDivElement;
 const taskButton = document.getElementById(
   "addTaskButton"
 ) as HTMLButtonElement;
 
 document.addEventListener("DOMContentLoaded", () => {
-  projectButton.addEventListener("click", newProjectInput);
-  taskButton.addEventListener("click", () => console.log(1));
+  projectButton.addEventListener("click", addProjectInput);
+  taskButton.addEventListener("click", addTaskInput);
 });
 
-const newProjectInput = () => {
-  const titleInput = createProject();
+const addProjectInput = () => {
+  const titleInput = createProjectInput();
   projectList?.appendChild(titleInput);
+  const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
+  inputElement.focus();
+};
+
+const addTaskInput = () => {
+  const titleInput = createTaskInput();
+  taskList?.appendChild(titleInput);
   const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
   inputElement.focus();
 };
@@ -34,9 +41,9 @@ export const addProjectTitle = (inputValue: string) => {
 export const addTaskTitle = (inputValue: string) => {
   const inputLabel = document.createElement("button");
   inputLabel.textContent = inputValue;
-  inputLabel.classList.add(`task${projects.project}`);
+  inputLabel.classList.add(`task${0}`);
   displayProject(inputLabel);
-  projectList?.appendChild(inputLabel);
+  taskList?.appendChild(inputLabel);
 };
 
 const addObject = (inputValue:any) => {

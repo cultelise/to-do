@@ -1,4 +1,4 @@
-import { addProjectTitle, addTaskTitle } from "./add";
+import { addProjectTitle, addTaskTitle} from "./add";
 import { inputDelete } from "./remove";
 
 
@@ -10,20 +10,23 @@ interface Project {
   }
 }
 
-export const projects = [];
+export const projects:any = [];
 
 export const NewProject = (input: string) => {
-  return { title: input };
+  return { title: input};
 };
 
 const NewTask = (input: string) => {
   return {title: input, details: ''}
 };
 
-export const createProject = () => {
+export const createProjectInput = () => {
   const newInput: HTMLInputElement = document.createElement('input');
   newInput.classList.add('tempInput');
   newInput.addEventListener('blur', (event) => generateProject(event));
+  newInput.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") newInput.blur();
+  });
   return newInput;
 };
 
@@ -32,7 +35,18 @@ const generateProject = (event: Event) => {
   const inputValue = inputElement.value;
   inputDelete(inputElement);
   addProjectTitle(inputValue);
-  return projects.push(NewProject(inputValue.toString()));
+  projects.push(NewProject(inputValue));
+  console.log(projects)
+};
+
+export const createTaskInput = () => {
+  const newInput: HTMLInputElement = document.createElement('input');
+  newInput.classList.add('tempInput');
+  newInput.addEventListener('blur', (event) => generateTask(event));
+  newInput.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") newInput.blur();
+  });
+  return newInput;
 };
 
 const generateTask = (event: Event) => {
@@ -40,14 +54,13 @@ const generateTask = (event: Event) => {
   const inputValue = inputElement.value;
   inputDelete(inputElement);
   addTaskTitle(inputValue);
-  projects.project.title = inputValue;
-  console.log(projects.project);
+  projects[0]['task'] = NewTask(inputValue);
+  console.log(projects)
+  console.log(projects[0]);
 };
 
 
-const createTask = () => {
-  const newInput: HTMLInputElement = document.createElement('input');
-  newInput.classList.add('tempInput');
-  newInput.addEventListener('blur', (event) => generateTask(event));
-  return newInput;
-};
+
+const createProjectObject = (project:object, task:object) => {
+
+}

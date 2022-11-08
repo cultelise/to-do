@@ -1,5 +1,6 @@
 import { app, createProjectInput, createTaskInput} from "./create";
-import { displayProject } from "./display";
+import { activeProject, displayProject, removeActiveProject } from "./display";
+import { clearTasks } from "./remove";
 
 
 const projectList = document.getElementById("projectList") as HTMLDivElement;
@@ -33,8 +34,10 @@ const addTaskInput = () => {
 export const addProjectTitle = (inputValue: string) => {
   const inputLabel = document.createElement("button");
   inputLabel.textContent = inputValue;
-  console.log(app.projects.length)
   inputLabel.classList.add(`project${app.projects.length}`);
+  removeActiveProject();
+  inputLabel.id = 'activeProject';
+  clearTasks();
   displayProject(inputLabel);
   projectList?.appendChild(inputLabel);
 };
@@ -42,11 +45,14 @@ export const addProjectTitle = (inputValue: string) => {
 export const addTaskTitle = (inputValue: string) => {
   const inputLabel = document.createElement("button");
   inputLabel.textContent = inputValue;
-  inputLabel.classList.add(`task${0}`);
+  inputLabel.classList.add(`task${getTaskLength()}`);
   displayProject(inputLabel);
   taskList?.appendChild(inputLabel);
 };
 
-const addObject = (inputValue:any) => {
-  inputValue
+const getTaskLength = () => {
+  const activeProjectNumber = (app.projects[activeProject() - 1]);
+  const taskLength = activeProjectNumber.tasks?.length;
+  console.log(taskLength);
+  console.log(activeProjectNumber.tasks);
 };

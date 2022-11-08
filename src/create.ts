@@ -1,5 +1,6 @@
 import { addProjectTitle, addTaskTitle} from "./add";
-import { inputDelete } from "./remove";
+import { activeProject } from "./display";
+import { initializeTasks, inputDelete, removeInitialProject } from "./remove";
 
 
 interface Project { 
@@ -41,8 +42,7 @@ const generateProject = (event: Event) => {
   const inputElement = event.target as HTMLInputElement;
   const inputValue = inputElement.value;
   inputDelete(inputElement);
-  console.log(app.projects)
-  if (app.projects[0].title === '709') app.projects.pop();
+  removeInitialProject();
   app.projects?.push(NewProject(inputValue));
   addProjectTitle(inputValue);
 };
@@ -62,15 +62,16 @@ const generateTask = (event: Event) => {
   const inputValue = inputElement.value;
   inputDelete(inputElement);
   addTaskTitle(inputValue);
-  app.projects[0].tasks = [{}]
-  if (app.projects[0].tasks[0].title == undefined) {
-    app.projects[0].tasks.shift();
-  }
-  app.projects[0].tasks?.push(NewTask(inputValue));
+  if (app.projects[0].tasks === undefined) app.projects[0].tasks = [{}];
+  initializeTasks();
+  console.log(app.projects)
+  app.projects[activeProject() - 1].tasks?.push(NewTask(inputValue));
 };
 
 
+const checkLength = () => {
 
+}
 const createProjectObject = (project:object, task:object) => {
 
 }

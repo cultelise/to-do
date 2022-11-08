@@ -9,6 +9,7 @@ export const NewProject = (input: string) => {
 
 const NewTask = (input: string) => {
   title: input;
+  task: [{}]
 };
 
 export const createProject = () => {
@@ -25,3 +26,5 @@ const generateProject = (event: Event) => {
   addProjectTitle(inputValue);
   return projects.push(NewProject(inputValue.toString()));
 };
+
+arrow

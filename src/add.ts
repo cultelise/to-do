@@ -1,6 +1,7 @@
 import { createProject, projects } from "./create";
 import { displayProject } from "./display";
 
+
 const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById(
   "addProjectButton"
@@ -28,4 +29,16 @@ export const addProjectTitle = (inputValue: string) => {
   inputLabel.classList.add(`project${projects.length}`);
   displayProject(inputLabel);
   projectList?.appendChild(inputLabel);
+};
+
+export const addTaskTitle = (inputValue: string) => {
+  const inputLabel = document.createElement("button");
+  inputLabel.textContent = inputValue;
+  inputLabel.classList.add(`task${projects.project}`);
+  displayProject(inputLabel);
+  projectList?.appendChild(inputLabel);
+};
+
+const addObject = (inputValue:any) => {
+  inputValue
 };

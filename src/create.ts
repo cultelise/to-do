@@ -1,21 +1,29 @@
-import { addProjectTitle } from "./add";
+import { addProjectTitle, addTaskTitle } from "./add";
 import { inputDelete } from "./remove";
 
-export const projects: object[] = [];
+
+interface Project {
+  title: string,
+  task: {
+    title: string,
+    details: string,
+  }
+}
+
+export const projects = [];
 
 export const NewProject = (input: string) => {
   return { title: input };
 };
 
 const NewTask = (input: string) => {
-  title: input;
-  task: [{}]
+  return {title: input, details: ''}
 };
 
 export const createProject = () => {
-  const newInput: HTMLInputElement = document.createElement(`input`);
-  newInput.classList.add(`tempInput`);
-  newInput.addEventListener("change", (event) => generateProject(event));
+  const newInput: HTMLInputElement = document.createElement('input');
+  newInput.classList.add('tempInput');
+  newInput.addEventListener('blur', (event) => generateProject(event));
   return newInput;
 };
 
@@ -27,4 +35,19 @@ const generateProject = (event: Event) => {
   return projects.push(NewProject(inputValue.toString()));
 };
 
-arrow
+const generateTask = (event: Event) => {
+  const inputElement = event.target as HTMLInputElement;
+  const inputValue = inputElement.value;
+  inputDelete(inputElement);
+  addTaskTitle(inputValue);
+  projects.project.title = inputValue;
+  console.log(projects.project);
+};
+
+
+const createTask = () => {
+  const newInput: HTMLInputElement = document.createElement('input');
+  newInput.classList.add('tempInput');
+  newInput.addEventListener('blur', (event) => generateTask(event));
+  return newInput;
+};

@@ -1,5 +1,5 @@
 import { app, createProjectInput, createTaskInput} from "./create";
-import { activeProject, chooseProject, removeActiveProject } from "./display";
+import { activeProject, chooseProject, chooseTask, removeActiveProject, removeActiveTask } from "./display";
 import { clearTasks } from "./remove";
 
 
@@ -46,8 +46,10 @@ export const addTaskTitle = (inputValue: string) => {
   const inputLabel = document.createElement("button");
   inputLabel.textContent = inputValue;
   inputLabel.classList.add(`task${getTaskLength()}`);
-  chooseProject(inputLabel);
-  taskList?.appendChild(inputLabel);
+  removeActiveTask();
+  inputLabel.id = 'activeTask';
+  chooseTask(inputLabel);
+  taskList.appendChild(inputLabel);
 };
 
 const getTaskLength = () => {

@@ -5,7 +5,7 @@ import { initializeTasks, inputDelete, removeInitialProject } from "./remove";
 
 interface Project { 
   projects: [{
-  title: string,
+  title?: string,
   tasks?: [{
     title?: any,
     details?: any,
@@ -61,11 +61,13 @@ const generateTask = (event: Event) => {
   const inputElement = event.target as HTMLInputElement;
   const inputValue = inputElement.value;
   inputDelete(inputElement);
-  addTaskTitle(inputValue);
-  if (app.projects[0].tasks === undefined) app.projects[0].tasks = [{}];
+  if (app.projects[activeProject()].tasks === undefined) app.projects[activeProject()].tasks = [{}];
   initializeTasks();
-  console.log(app.projects)
-  app.projects[activeProject() - 1].tasks?.push(NewTask(inputValue));
+  console.log(app.projects[activeProject()])
+  if (app.projects[activeProject()].tasks !== undefined) {
+  app.projects[activeProject()].tasks?.push(NewTask(inputValue));
+}
+  addTaskTitle(inputValue);
 };
 
 

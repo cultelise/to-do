@@ -1,5 +1,5 @@
 import { app, createProjectInput, createTaskInput} from "./create";
-import { activeProject, displayProject, removeActiveProject } from "./display";
+import { activeProject, chooseProject, removeActiveProject } from "./display";
 import { clearTasks } from "./remove";
 
 
@@ -7,7 +7,7 @@ const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById(
   "addProjectButton"
 ) as HTMLButtonElement;
-const taskList = document.getElementById("taskList") as HTMLDivElement;
+export const taskList = document.getElementById("taskList") as HTMLDivElement;
 const taskButton = document.getElementById(
   "addTaskButton"
 ) as HTMLButtonElement;
@@ -38,7 +38,7 @@ export const addProjectTitle = (inputValue: string) => {
   removeActiveProject();
   inputLabel.id = 'activeProject';
   clearTasks();
-  displayProject(inputLabel);
+  chooseProject(inputLabel);
   projectList?.appendChild(inputLabel);
 };
 
@@ -46,13 +46,12 @@ export const addTaskTitle = (inputValue: string) => {
   const inputLabel = document.createElement("button");
   inputLabel.textContent = inputValue;
   inputLabel.classList.add(`task${getTaskLength()}`);
-  displayProject(inputLabel);
+  chooseProject(inputLabel);
   taskList?.appendChild(inputLabel);
 };
 
 const getTaskLength = () => {
-  const activeProjectNumber = (app.projects[activeProject() - 1]);
+  const activeProjectNumber = (app.projects[activeProject()]);
   const taskLength = activeProjectNumber.tasks?.length;
-  console.log(taskLength);
-  console.log(activeProjectNumber.tasks);
+  return taskLength;
 };

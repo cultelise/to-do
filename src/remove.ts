@@ -9,9 +9,11 @@ export const removeInitialProject = () => {
   if (app.projects[0].title === '709') app.projects.pop();
 }
 export const initializeTasks = () => {
-  if (app.projects[0].tasks !== undefined) {
-    if (app.projects[0].tasks[0].title == undefined) {
-      app.projects[0].tasks.shift();
+  const active = app.projects[activeProject()]
+  if (active.tasks !== undefined) {
+    if (active.tasks[0].title == undefined) {
+     
+      active.tasks.shift();
     }
   }
 }

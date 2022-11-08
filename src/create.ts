@@ -2,22 +2,29 @@ import { addProjectTitle, addTaskTitle} from "./add";
 import { inputDelete } from "./remove";
 
 
-interface Project {
+interface Project { 
+  projects: [{
   title: string,
-  task: {
-    title: string,
-    details: string,
-  }
-}
+  tasks?: [{
+    title?: any,
+    details?: any,
+  }]
+}]}
 
-export const projects:any = [];
+export const app = {
+  projects: [{
+    title: '709',
+  }]
+} as Project;
+console.log(app)
 
 export const NewProject = (input: string) => {
-  return { title: input};
+  let title = input;
+  return {title};
 };
 
 const NewTask = (input: string) => {
-  return {title: input, details: ''}
+  return {title: input}
 };
 
 export const createProjectInput = () => {
@@ -34,9 +41,10 @@ const generateProject = (event: Event) => {
   const inputElement = event.target as HTMLInputElement;
   const inputValue = inputElement.value;
   inputDelete(inputElement);
+  console.log(app.projects)
+  if (app.projects[0].title === '709') app.projects.pop();
+  app.projects?.push(NewProject(inputValue));
   addProjectTitle(inputValue);
-  projects.push(NewProject(inputValue));
-  console.log(projects)
 };
 
 export const createTaskInput = () => {
@@ -54,9 +62,11 @@ const generateTask = (event: Event) => {
   const inputValue = inputElement.value;
   inputDelete(inputElement);
   addTaskTitle(inputValue);
-  projects[0]['task'] = NewTask(inputValue);
-  console.log(projects)
-  console.log(projects[0]);
+  app.projects[0].tasks = [{}]
+  if (app.projects[0].tasks[0].title == undefined) {
+    app.projects[0].tasks.shift();
+  }
+  app.projects[0].tasks?.push(NewTask(inputValue));
 };
 
 

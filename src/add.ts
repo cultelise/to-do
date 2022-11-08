@@ -1,4 +1,4 @@
-import { createProjectInput, createTaskInput, projects } from "./create";
+import { app, createProjectInput, createTaskInput} from "./create";
 import { displayProject } from "./display";
 
 
@@ -33,7 +33,8 @@ const addTaskInput = () => {
 export const addProjectTitle = (inputValue: string) => {
   const inputLabel = document.createElement("button");
   inputLabel.textContent = inputValue;
-  inputLabel.classList.add(`project${projects.length}`);
+  console.log(app.projects.length)
+  inputLabel.classList.add(`project${app.projects.length}`);
   displayProject(inputLabel);
   projectList?.appendChild(inputLabel);
 };

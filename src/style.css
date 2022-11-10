@@ -12,9 +12,8 @@
 
 #projects {
   border-right: 1px solid black;
-  display:grid;
+  display: grid;
   grid-template: 1fr 25px / 1fr;
-  
 }
 
 #tasks {
@@ -60,7 +59,7 @@ button {
   border-bottom: 1px solid black;
 }
 
-input{
+input {
   text-align: center;
 }
 
@@ -73,7 +72,6 @@ input{
 #detailsBox {
   display: grid;
   border-bottom: 1px solid black;
-
 }
 
 #taskList *,

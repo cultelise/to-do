@@ -46,8 +46,9 @@ const addTaskTitle = (inputValue: string) => {
 const getTaskLength = () => {
   const activeProjectNumber = app.projects[activeProject()];
   if (activeProjectNumber.tasks !== undefined) {
-  const taskLength = activeProjectNumber.tasks.length;
-  return taskLength;}
+    const taskLength = activeProjectNumber.tasks.length;
+    return taskLength;
+  }
 };
 
 const generateTask = (event: Event) => {
@@ -88,9 +89,10 @@ export const chooseTask = (project: HTMLButtonElement) => {
       if (e.target instanceof Element) {
         e.target.id = "activeTask";
       }
-       if (document.querySelector('#details') === undefined) {
+      if (document.querySelector("#details") === undefined) {
         createDetailElement();
-       } else clearDetails(); createDetailElement();
+      } else clearDetails();
+      createDetailElement();
     }
   });
 };
@@ -101,7 +103,7 @@ export const activeTask = () => {
     const activeTaskNumber = Number.parseInt(
       activeTaskButton.className.slice(-1)
     );
-    return activeTaskNumber === 0 ? activeTaskNumber: activeTaskNumber - 1;
+    return activeTaskNumber === 0 ? activeTaskNumber : activeTaskNumber - 1;
   }
   return 0;
 };

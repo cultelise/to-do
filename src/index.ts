@@ -1,8 +1,7 @@
-import "./style"
-import "./projects"
-import "./tasks"
-import "./details"
-
+import "./style";
+import "./projects";
+import "./tasks";
+import "./details";
 
 interface Project {
   projects: [

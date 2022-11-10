@@ -1,5 +1,5 @@
 import { app } from ".";
-import { clearDetails, detailElement } from "./details";
+import { clearDetails, createDetailElement} from "./details";
 import { activeProject } from "./projects";
 
 export const taskList = document.getElementById("taskList") as HTMLDivElement;
@@ -59,7 +59,8 @@ const generateTask = (event: Event) => {
     app.projects[activeProject()].tasks?.push(NewTask(inputValue));
   }
   addTaskTitle(inputValue);
-  detailElement();
+  clearDetails();
+  createDetailElement();
 };
 
 const initializeTasks = () => {
@@ -86,7 +87,7 @@ const chooseTask = (project: HTMLButtonElement) => {
       if (e.target instanceof Element) {
         e.target.id = "activeTask";
       }
-      displayTask();
+      createDetailElement();
     }
   });
 };
@@ -97,7 +98,6 @@ export const activeTask = () => {
     const activeTaskNumber = Number.parseInt(
       activeTaskButton.className.slice(-1)
     );
-    console.log(activeTaskNumber);
     return activeTaskNumber - 1;
   }
   return 5;
@@ -107,9 +107,8 @@ const displayTask = () => {
   const project = app.projects[activeProject()].tasks;
   if (project !== undefined) {
     const task = project[activeTask()];
-    const detailsDiv = document.querySelector("#details") as HTMLInputElement;
-    if (detailsDiv !== null && detailsDiv !== undefined)
-      detailsDiv.value = task.details;
+    createDetailElement();
+    console.log(task.details)
   }
 };
 

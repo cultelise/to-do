@@ -28,5 +28,5 @@ export const clearTasks = () => {
 export const clearDetails = () => {
   const details = document.querySelector('#details') as HTMLInputElement;
   console.log(details.value)
-  if (details !== undefined) details.value = 'blargha';
+  if (details !== undefined) details.value = '';
 };

@@ -2,10 +2,8 @@ import { app } from ".";
 import { activeProject } from "./projects";
 import { activeTask } from "./tasks";
 
-const detailElement = document.querySelector('#details') as HTMLInputElement;
-
 export const createDetailElement = () => {
-  const element = document.createElement('input') as HTMLInputElement;
+  const element = document.createElement('textarea') as HTMLTextAreaElement;
   element.id = 'details'
   element.setAttribute('type', 'text')
   const lang = app.projects[activeProject()].tasks;
@@ -20,11 +18,11 @@ export const createDetailElement = () => {
       long.details = text;
     });
   }
-  element.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") element.blur();
-  });
-  const appDiv = document.querySelector('#app');
-  if (appDiv !== null) appDiv.appendChild(element);
+  const detailsDiv = document.querySelector('#detailsBox') as HTMLDivElement;
+  if (detailsDiv !== null) {
+  detailsDiv.appendChild(element);
+  detailsDiv.addEventListener('click', () => element.focus());
+  }
   if (lang !== undefined) {
     let long = lang[activeTask()];
     if (long !== undefined) {

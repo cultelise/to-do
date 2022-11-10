@@ -15,11 +15,12 @@ const NewTask = (input: string) => {
   return { title: input };
 };
 
-const addTaskInput = () => {
+export const addTaskInput = () => {
   const titleInput = createTaskInput();
   taskList?.appendChild(titleInput);
   const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
   inputElement.focus();
+  clearDetails();
 };
 
 const createTaskInput = () => {
@@ -60,7 +61,6 @@ const generateTask = (event: Event) => {
     app.projects[activeProject()].tasks?.push(NewTask(inputValue));
   }
   addTaskTitle(inputValue);
-  clearDetails();
   createDetailElement();
 };
 

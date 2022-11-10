@@ -1,5 +1,6 @@
 import { app } from ".";
-import { chooseTask, clearTasks, taskList } from "./tasks";
+import { clearDetails } from "./details";
+import { addTaskInput, chooseTask, clearTasks, taskList } from "./tasks";
 
 const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById(
@@ -19,6 +20,8 @@ const addProjectInput = () => {
   projectList?.appendChild(titleInput);
   const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
   inputElement.focus();
+  clearDetails();
+  clearTasks();
 };
 
 const createProjectInput = () => {
@@ -52,11 +55,13 @@ const addProjectTitle = (inputValue: string) => {
   inputLabel.id = "activeProject";
   clearTasks();
   chooseProject(inputLabel);
-  projectList?.appendChild(inputLabel);
+  projectList.appendChild(inputLabel);
+  addTaskInput();
 };
 
 const chooseProject = (project: HTMLButtonElement) => {
   project.addEventListener("click", (e) => {
+    clearDetails();
     clearTasks();
     if (e.target !== null) {
       removeActiveProject();

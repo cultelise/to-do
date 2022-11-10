@@ -1,5 +1,5 @@
 import { app } from ".";
-import { clearDetails, createDetailElement} from "./details";
+import { clearDetails, createDetailElement } from "./details";
 import { activeProject } from "./projects";
 
 export const taskList = document.getElementById("taskList") as HTMLDivElement;
@@ -11,11 +11,25 @@ document.addEventListener("DOMContentLoaded", () => {
   taskButton.addEventListener("click", addTaskInput);
 });
 
+const NewTask = (input: string) => {
+  return { title: input };
+};
+
 const addTaskInput = () => {
   const titleInput = createTaskInput();
   taskList?.appendChild(titleInput);
   const inputElement = document.querySelector(`.tempInput`) as HTMLInputElement;
   inputElement.focus();
+};
+
+const createTaskInput = () => {
+  const newInput: HTMLInputElement = document.createElement("input");
+  newInput.classList.add("tempInput");
+  newInput.addEventListener("blur", (event) => generateTask(event));
+  newInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") newInput.blur();
+  });
+  return newInput;
 };
 
 const addTaskTitle = (inputValue: string) => {
@@ -30,22 +44,9 @@ const addTaskTitle = (inputValue: string) => {
 
 const getTaskLength = () => {
   const activeProjectNumber = app.projects[activeProject()];
-  const taskLength = activeProjectNumber.tasks?.length;
-  return taskLength;
-};
-
-const NewTask = (input: string) => {
-  return { title: input };
-};
-
-const createTaskInput = () => {
-  const newInput: HTMLInputElement = document.createElement("input");
-  newInput.classList.add("tempInput");
-  newInput.addEventListener("blur", (event) => generateTask(event));
-  newInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") newInput.blur();
-  });
-  return newInput;
+  if (activeProjectNumber.tasks !== undefined) {
+  const taskLength = activeProjectNumber.tasks.length;
+  return taskLength;}
 };
 
 const generateTask = (event: Event) => {
@@ -79,7 +80,7 @@ export const clearTasks = () => {
   });
 };
 
-const chooseTask = (project: HTMLButtonElement) => {
+export const chooseTask = (project: HTMLButtonElement) => {
   project.addEventListener("click", (e) => {
     clearDetails();
     if (e.target !== null) {
@@ -87,7 +88,9 @@ const chooseTask = (project: HTMLButtonElement) => {
       if (e.target instanceof Element) {
         e.target.id = "activeTask";
       }
-      createDetailElement();
+       if (document.querySelector('#details') === undefined) {
+        createDetailElement();
+       } else clearDetails(); createDetailElement();
     }
   });
 };
@@ -98,18 +101,9 @@ export const activeTask = () => {
     const activeTaskNumber = Number.parseInt(
       activeTaskButton.className.slice(-1)
     );
-    return activeTaskNumber - 1;
+    return activeTaskNumber === 0 ? activeTaskNumber: activeTaskNumber - 1;
   }
-  return 5;
-};
-
-const displayTask = () => {
-  const project = app.projects[activeProject()].tasks;
-  if (project !== undefined) {
-    const task = project[activeTask()];
-    createDetailElement();
-    console.log(task.details)
-  }
+  return 0;
 };
 
 const removeActiveTask = () => {

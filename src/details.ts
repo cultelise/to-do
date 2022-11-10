@@ -2,18 +2,20 @@ import { app } from ".";
 import { activeProject } from "./projects";
 import { activeTask } from "./tasks";
 
-const appDiv = document.querySelector('#app');
 const detailElement = document.querySelector('#details') as HTMLInputElement;
 
 export const createDetailElement = () => {
   const element = document.createElement('input') as HTMLInputElement;
   element.id = 'details'
   element.setAttribute('type', 'text')
-  const active = activeProject();
-  const lang = app.projects[active].tasks;
+  const lang = app.projects[activeProject()].tasks;
   if (lang !== undefined) {
     const long = lang[activeTask()];
     element.addEventListener("blur", () => {
+      const text = element.value;
+      long.details = text;
+    });
+    element.addEventListener("focusin", () => {
       const text = element.value;
       long.details = text;
     });
@@ -21,9 +23,16 @@ export const createDetailElement = () => {
   element.addEventListener("keydown", (event) => {
     if (event.key === "Enter") element.blur();
   });
-  appDiv?.appendChild(element);
+  const appDiv = document.querySelector('#app');
+  if (appDiv !== null) appDiv.appendChild(element);
   if (lang !== undefined) {
-  element.value = lang[activeTask()].details};
+    let long = lang[activeTask()];
+    if (long !== undefined) {
+      long.hasOwnProperty('details') 
+        ? element.value = long.details
+        : long.details = '';
+    }
+  }
   if (element !== null) element.focus();
 };
 

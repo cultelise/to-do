@@ -1,5 +1,5 @@
 import { app } from ".";
-import { clearTasks, taskList } from "./tasks";
+import { chooseTask, clearTasks, taskList } from "./tasks";
 
 const projectList = document.getElementById("projectList") as HTMLDivElement;
 const projectButton = document.getElementById(
@@ -68,6 +68,20 @@ const chooseProject = (project: HTMLButtonElement) => {
   });
 };
 
+const displayProject = () => {
+  const project = app.projects[activeProject()];
+  if (project.tasks !== undefined) {
+    for (let i = 0; i < project.tasks.length; i++) {
+      const element = project.tasks[i];
+      const button = document.createElement("button") as HTMLButtonElement;
+      button.classList.add(`task${i + 1}`);
+      button.textContent = `${element.title}`;
+      taskList.appendChild(button);
+      chooseTask(button);
+    }
+  }
+};
+
 export const activeProject = () => {
   const activeProjectButton = document.querySelector("#activeProject");
   if (activeProjectButton !== undefined && activeProjectButton !== null) {
@@ -77,19 +91,6 @@ export const activeProject = () => {
     return activeProjectNumber - 1;
   }
   return 5;
-};
-
-const displayProject = () => {
-  const project = app.projects[activeProject()];
-  if (project.tasks !== undefined) {
-    for (let i = 0; i < project.tasks.length; i++) {
-      const element = project.tasks[i];
-      const div = document.createElement("button");
-      div.classList.add(`task${i}`);
-      div.textContent = `${element.title}`;
-      taskList.appendChild(div);
-    }
-  }
 };
 
 const removeActiveProject = () => {

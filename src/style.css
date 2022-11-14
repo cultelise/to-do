@@ -71,10 +71,15 @@ input {
 
 #detailsBox {
   display: grid;
+  grid-template-rows: 25px 10fr;
   border-bottom: 1px solid black;
 }
 
 #taskList *,
 #projectList * {
+  border-bottom: 1px solid black;
+}
+
+#task-bar {
   border-bottom: 1px solid black;
 }
